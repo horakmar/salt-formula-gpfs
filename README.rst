@@ -3,7 +3,7 @@
 GPFS Formula
 =============
 
-IBM GPFS is a shared filesystem.
+IBM Spectrum Scale (GPFS) is a shared filesystem.
 
 Sample Pillars
 ==============
