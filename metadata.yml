@@ -1,0 +1,6 @@
+name: "gpfs"
+version: "0.0.1"
+source: "https://github.com/horakmar/salt-formula-gpfs"
+dependencies:
+  - name: salt
+    source: "https://github.com/salt-formulas/salt-formula-salt"

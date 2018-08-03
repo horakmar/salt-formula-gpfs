@@ -1,0 +1,35 @@
+{%- load_yaml as gpfs_node %}
+Debian:
+  system_user: qpgpfs
+  pkgs:
+    - gpfs.base
+    - gpfs.gpl
+    - gpfs.msg.en-us
+    - gpfs.gskit
+    - gpfs.license.dm
+    - gpfs.ext
+  docpkgs:
+    - gpfs.docs
+  buildpkgs:
+    - make
+    - cpp
+    - gcc
+    - g++
+RedHat:
+  system_user: qpgpfs
+  pkgs:
+    - gpfs.base
+    - gpfs.gpl
+    - gpfs.msg.en-us
+    - gpfs.gskit
+    - gpfs.license.dm
+    - gpfs.ext
+  docpkgs:
+    - gpfs.docs
+  buildpkgs:
+    - kernel-devel
+    - kernel-headers
+    - gcc-c++
+{%- endload %}
+
+{%- set gpfs = salt['grains.filter_by'](gpfs_node, merge=salt['pillar.get']('gpfs:node')) %}

@@ -1,0 +1,9 @@
+applications:
+- gpfs
+classes:
+- service.gpfs.support
+parameters:
+  gpfs:
+    client:
+      enabled: true
+    system_user: qpgpfs

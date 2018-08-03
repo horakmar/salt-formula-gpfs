@@ -1,0 +1,19 @@
+parameters:
+  gpfs:
+    _support:
+      fluentd:
+        enabled: false
+      collectd:
+        enabled: false
+      heka:
+        enabled: false
+      sensu:
+        enabled: false
+      sphinx:
+        enabled: false
+      grafana:
+        enabled: false
+      prometheus:
+        enabled: false
+      telegraf:
+        enabled: false

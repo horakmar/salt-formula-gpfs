@@ -1,0 +1,6 @@
+.kitchen
+tests/build/
+*.swp
+*.swo
+*.pyc
+.ropeproject
