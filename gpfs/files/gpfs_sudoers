@@ -1,0 +1,12 @@
+{%- from "gpfs/map.jinja" import gpfs with context %}
+# Preserve GPFS environment variables:
+Defaults env_keep += "MMMODE environmentType GPFS_rshPath GPFS_rcpPath mmScriptTrace GPFSCMDPORTRANGE GPFS_CIM_MSG_FORMAT"
+
+# Allow members of the gpfs.system_user group to run all commands but only selected commands without a password:
+%{{ gpfs.system_user }} ALL=(ALL) PASSWD: ALL, NOPASSWD: /usr/lpp/mmfs/bin/mmremote, /usr/bin/scp, /bin/echo, /usr/lpp/mmfs/bin/mmsdrrestore
+
+# Disable requiretty for group gpfs.system_user:
+Defaults:%{{ gpfs.system_user }} !requiretty
+
+# Set path for group gpfs.system_user
+Defaults:%{{ gpfs.system_user }} secure_path = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/lpp/mmfs/bin"

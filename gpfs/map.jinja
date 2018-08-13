@@ -15,6 +15,7 @@ Debian:
     - cpp
     - gcc
     - g++
+  service: gpfs
 RedHat:
   system_user: qpgpfs
   pkgs:
@@ -30,6 +31,7 @@ RedHat:
     - kernel-devel
     - kernel-headers
     - gcc-c++
+  service: gpfs
 {%- endload %}
 
-{%- set gpfs = salt['grains.filter_by'](gpfs_node, merge=salt['pillar.get']('gpfs:node')) %}
+{%- set gpfs = salt['grains.filter_by'](gpfs_node, merge=salt['pillar.get']('gpfs')) %}

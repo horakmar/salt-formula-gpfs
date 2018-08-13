@@ -25,3 +25,21 @@ modules_build:
   cmd.run:
   - name: mmbuildgpl
   - prepend_path: /usr/lpp/mmfs/bin
+
+gpfs_sudoers:
+  file.managed:
+  - name: /etc/sudoers.d/gpfs_sudoers
+  - source: salt://gpfs/files/gpfs_sudoers
+  - template: jinja
+  - user: root
+  - group: root
+  - mode: 440
+  - makedirs: true
+  - dir_mode: 755
+
+#TODO at this point the client should be registered on gpfs server, otherwise service.running gpfs failed
+
+gpfs_service:
+  service.running:
+  - name: {{ gpfs.service }}
+  - enable: true

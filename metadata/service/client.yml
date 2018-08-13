@@ -6,4 +6,4 @@ parameters:
   gpfs:
     client:
       enabled: true
-    system_user: qpgpfs
+    system_user: qpspectrum
