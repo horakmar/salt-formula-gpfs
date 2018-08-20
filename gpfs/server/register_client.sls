@@ -1,3 +1,4 @@
+{#- Only register client on GPFS server. Intended to be called from orchestrator. #}
 {%- set client_name = salt['pillar.get']('client_name') %}
 
 register_client:
