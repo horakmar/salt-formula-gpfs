@@ -1,19 +1,18 @@
 {%- set node_name = salt['pillar.get']('event_originator', none) %}
 {%- set data = salt['pillar.get']('event_data', none) %}
-{%- if data and data['client_name'] %}
+{%- if data and data['client_name'] != 'None' and data['client_name'] != 'none' %}
 {%-   set client_name = data['client_name'] %}
 {%- else %}
 {%-   set client_name = node_name %}
 {%- endif %}
 
 register_node:
-  salt.function:
-    - name: cmd.run
+  salt.state:
     - tgt: gpftcl1.cezdata.corp
-    - arg:
-      - 'su qpspectrum "-c sudo /usr/lpp/mmfs/bin/mmaddnode -N {{ client_name }}:client"; /usr/lpp/mmfs/bin/mmchlicense client --accept -N {{ client_name }};'
-    - kwarg:
-        unless: 'su qpspectrum "-c sudo /usr/lpp/mmfs/bin/mmlsnode -N {{ client_name }}"'
+    - sls: gpfs.server.register_client
+    - queue: True
+    - pillar:
+        client_name: {{ client_name }}
 
 set_grain:
   salt.function:
@@ -22,6 +21,8 @@ set_grain:
     - arg:
       - gpfs_registered
       - {{ client_name }}
+    - require:
+      - salt: register_node
 
 gpfs_service_state:
   salt.state:

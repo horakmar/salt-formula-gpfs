@@ -37,9 +37,8 @@ gpfs_sudoers:
   - makedirs: true
   - dir_mode: 755
 
-#TODO at this point the client should be registered on gpfs server, otherwise service.running gpfs failed
-
-gpfs_service:
-  service.running:
-  - name: {{ gpfs.service }}
-  - enable: true
+send_register_event:
+  event.send:
+    - name: gpfs/node/register
+    - data:
+        client_name: {{ gpfs.client_name }}
